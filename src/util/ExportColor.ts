@@ -1,5 +1,5 @@
 // Libraries
-import Excel, { Workbook, Worksheet, Row, Cell } from 'exceljs';
+import Excel from 'exceljs';
 import fs from 'fs';
 import path from 'path';
 import { Argb } from './Argb';
@@ -29,13 +29,10 @@ export class ExportColor {
                 stream,
                 useStyles: true
             }); 
-
-            
             
             // Create colors cells! 😎
             const data = this.getData();
             
-            console.log('cell size', this.cellSize);
             // Create sheet
             const worksheet = workbook.addWorksheet('COLORS', { properties: { defaultColWidth: this.cellSize / 4, defaultRowHeight: this.cellSize }});
             for (const dataRow of data) {
@@ -69,15 +66,14 @@ export class ExportColor {
         for (let r = 0; r < this.gridSize; r++) { // r: Row
             const row: Argb[] = [];
             for (let c = 0; c < this.gridSize; c++) { // c: Column
-                const argb = new Argb(this.gridSize, r, c);
-                row.push(argb);
+                row.push(new Argb(this.gridSize, r, c));
             }
             rows.push(row);
         }
         return rows;
     }
 
-    getFillStyle (color: Partial<Excel.Color>): Excel.Fill {
+    private getFillStyle (color: Partial<Excel.Color>): Excel.Fill {
         return {
             type: 'pattern',
             pattern: 'solid',
