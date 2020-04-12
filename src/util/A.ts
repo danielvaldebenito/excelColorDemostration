@@ -1,21 +1,11 @@
-export class A  {
-    private number: number;
+import { Section } from "./Section";
+
+export class A extends Section {
     hex: string;
-    constructor(gridSize: number, r: number, c: number) {
-        this.number = this.getNumber(gridSize, r, c);
+    formula = () => Math.round(256 / ((this.r + 1) * this.gridSize) + this.c + 1);
+    constructor(private gridSize: number, private r: number, private c: number) {
+        super();
+        this.number = this.formula();
         this.hex = this.getHex();
-    }
-
-    getNumber(gridSize: number, r: number, c: number): number {
-        const segment = Math.round(256 / ((r + 1) * gridSize) + c + 1);
-        return segment;
-    }
-
-    getHex() {
-        let hex = this.number.toString(16);
-        if (hex.length < 2) {
-            hex = '0' + hex;
-        }
-        return hex;
     }
 }

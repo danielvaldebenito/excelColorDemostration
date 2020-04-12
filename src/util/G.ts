@@ -1,20 +1,11 @@
-export class G  {
-    number: number;
+import { Section } from "./Section";
+
+export class G extends Section {
     hex: string;
-    constructor(gridSize: number, r: number, c: number) {
-        this.number = this.getNumber(gridSize, r, c);
+    formula = () => Math.round(this.r * 255 / this.gridSize);
+    constructor(private gridSize: number, private r: number, private c: number) {
+        super();
+        this.number = this.formula();
         this.hex = this.getHex();
-    }
-
-    getNumber(gridSize: number, r: number, c: number): number {
-        return Math.round(r * 255 / gridSize);
-    }
-
-    getHex() {
-        let hex = this.number.toString(16);
-        if (hex.length < 2) {
-            hex = '0' + hex;
-        }
-        return hex;
     }
 }
