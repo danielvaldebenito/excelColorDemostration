@@ -13,7 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "exceljs": "^3.8.2",
-    "express": "^4.17.1"
+    "express": "^4.18.2"
   },
   "devDependencies": {
     "@types/exceljs": "^1.3.0",
